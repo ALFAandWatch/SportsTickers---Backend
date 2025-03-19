@@ -1,11 +1,13 @@
 import { Request, Response } from 'express';
 import * as linksService from '../services/linksService';
 
+// import { getLinkBySportService } from '../services/linksService';
+
 export const getLinksBySportController = async (
    req: Request,
    res: Response
 ) => {
-   const sport = req.query.sport as string;
+   const sport = req.params.sport; // ✅ Use req.params instead of req.query
 
    if (!sport) {
       return res.status(400).json({ message: 'Sport is required' });
