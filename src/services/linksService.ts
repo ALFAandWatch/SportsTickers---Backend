@@ -1,15 +1,16 @@
 import { AppDataSource } from '../config/data-source';
-import { Links } from '../entities/links';
+import { Link } from '../entities/Link';
 
-export const getLinkBySportService = async (
-   sport: string
-): Promise<Links[]> => {
-   const linksRepository = AppDataSource.getRepository(Links);
-   return await linksRepository.find({
+export const getLinkBySportService = async (sport: string): Promise<Link[]> => {
+   const linksRepository = AppDataSource.getRepository(Link);
+   const links = await linksRepository.find({
       where: {
          sport,
       },
+      relations: { country: true },
    });
+
+   return links;
 };
 
 // export const addLinkService = async (req: Request, res: Response) => {

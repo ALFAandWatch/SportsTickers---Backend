@@ -1,15 +1,24 @@
+import 'dotenv/config';
+import { AppDataSource } from './config/data-source';
 import server from './server';
 import { PORT } from './config/envs';
-import 'reflect-metadata';
-import { AppDataSource } from './config/data-source';
+import { preloadLinks } from './utils/preLoadLinks';
+import { preloadCountries } from './utils/preLoadCountries';
 
-AppDataSource.initialize()
-   .then((res) => {
-      console.log('Conexión a la base de datos realizada con éxito!');
+const startServer = async () => {
+   try {
+      await AppDataSource.initialize();
+
+      await preloadCountries();
+      await preloadLinks();
+
+      console.log('Database connected!');
+
       server.listen(PORT, () => {
-         console.log(`* * Server is Listening on port ${PORT}! * *`);
+         console.log(`Server is running on port ${PORT}`);
       });
-   })
-   .catch((Error) => {
-      console.log(`Error al conectarse a la Base de Datos: ${Error}`);
-   });
+   } catch (error) {
+      console.error('Error during Data Source initialization', error);
+   }
+};
+startServer();

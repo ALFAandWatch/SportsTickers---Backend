@@ -3,6 +3,6 @@ import { getLinksBySportController } from '../controllers/linksController';
 
 const linksRouter = Router();
 
-linksRouter.get('/links', getLinksBySportController);
+linksRouter.get('/', getLinksBySportController.getLinksBySport);
 
 export default linksRouter;

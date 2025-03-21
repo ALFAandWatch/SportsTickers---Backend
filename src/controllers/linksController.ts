@@ -1,22 +1,39 @@
 import { Request, Response } from 'express';
-import * as linksService from '../services/linksService';
+import { Repository } from 'typeorm';
+import { AppDataSource } from '../config/data-source';
+import { Link } from '../entities/Link'; // Adjust the path based on your folder structure
 
-// import { getLinkBySportService } from '../services/linksService';
+export const getLinksBySportController = {
+   getLinksBySport: async (req: Request, res: Response) => {
+      const { sport } = req.query;
 
-export const getLinksBySportController = async (
-   req: Request,
-   res: Response
-) => {
-   const sport = req.params.sport; // ✅ Use req.params instead of req.query
+      if (typeof sport !== 'string') {
+         return res
+            .status(400)
+            .json({ message: 'Sport parameter must be a string.' });
+      }
 
-   if (!sport) {
-      return res.status(400).json({ message: 'Sport is required' });
-   }
+      // Get the repository for the Link entity
+      const linkRepository: Repository<Link> =
+         AppDataSource.getRepository(Link);
 
-   try {
-      const links = await linksService.getLinkBySportService(sport);
-      res.json(links);
-   } catch (error) {
-      res.status(500).json({ message: 'Error fetching links', error });
-   }
+      try {
+         // Fetch the links from the database where the sport matches the query
+         const filteredLinks = await linkRepository.find({
+            where: { sport: sport },
+            relations: { country: true },
+         });
+
+         if (filteredLinks.length === 0) {
+            return res
+               .status(404)
+               .json({ message: 'No links found for the given sport.' });
+         }
+
+         // Send the filtered links as the response
+         res.json(filteredLinks);
+      } catch (error) {
+         return res.status(500).json({ message: 'Server error.' });
+      }
+   },
 };

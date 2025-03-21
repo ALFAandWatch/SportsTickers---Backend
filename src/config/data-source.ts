@@ -1,7 +1,7 @@
 import { DataSource } from 'typeorm';
-import dotenv from 'dotenv';
-
-dotenv.config();
+import 'dotenv/config';
+import { Country } from '../entities/Country';
+import { Link } from '../entities/Link';
 
 export const AppDataSource = new DataSource({
    type: 'postgres',
@@ -10,9 +10,11 @@ export const AppDataSource = new DataSource({
    username: process.env.DB_USER,
    password: process.env.DB_PASSWORD,
    database: process.env.DB_NAME,
-   entities: ['src/entities/*.ts'],
+   entities: [Link, Country],
+   // dropSchema: true,
    synchronize: true, // Change to false in production
-   logging: true,
+   logging: ['error'],
+   name: 'default',
 });
 
 AppDataSource.initialize()
