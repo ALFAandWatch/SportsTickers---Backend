@@ -10,37 +10,37 @@ export const preloadLinks = async () => {
             url: 'https://www.laliganacional.com.ar/laliga/',
             league: 'Liga Nacional de Basketball',
             sport: 'basketball',
-            countryId: 32,
+            countryId: 10,
          },
          {
             url: 'https://www.mlb.com/',
             league: 'MLB',
             sport: 'baseball',
-            countryId: 840,
+            countryId: 236,
          },
          {
             url: 'https://lnfoficial.com.br/',
             league: 'Liga Nacional de Futsal',
             sport: 'futsal',
-            countryId: 76,
+            countryId: 31,
          },
          {
             url: 'https://www.asobal.es/',
             league: 'Liga Asobal',
             sport: 'handball',
-            countryId: 724,
+            countryId: 209,
          },
          {
             url: 'https://chl.ca/',
             league: 'Canadian Hockey League',
             sport: 'ice hockey',
-            countryId: 124,
+            countryId: 40,
          },
          {
             url: 'https://cbv.com.br/volei-de-quadra/superliga-a-feminina',
             league: 'Superliga - Femenina',
             sport: 'volleyball',
-            countryId: 76,
+            countryId: 31,
          },
       ];
 
