@@ -7,22 +7,40 @@ export const preloadLinks = async () => {
       // Create some links to insert
       const links: Partial<Link>[] = [
          {
-            url: 'https://link1.com',
-            league: 'NBA',
+            url: 'https://www.laliganacional.com.ar/laliga/',
+            league: 'Liga Nacional de Basketball',
             sport: 'basketball',
-            countryId: 4,
+            countryId: 32,
          },
          {
-            url: 'https://link2.com',
-            league: 'NFL',
+            url: 'https://www.mlb.com/',
+            league: 'MLB',
             sport: 'baseball',
-            countryId: 8,
+            countryId: 840,
          },
          {
-            url: 'https://link3.com',
-            league: 'NBA',
-            sport: 'baseball',
-            countryId: 8,
+            url: 'https://lnfoficial.com.br/',
+            league: 'Liga Nacional de Futsal',
+            sport: 'futsal',
+            countryId: 76,
+         },
+         {
+            url: 'https://www.asobal.es/',
+            league: 'Liga Asobal',
+            sport: 'handball',
+            countryId: 724,
+         },
+         {
+            url: 'https://chl.ca/',
+            league: 'Canadian Hockey League',
+            sport: 'ice hockey',
+            countryId: 124,
+         },
+         {
+            url: 'https://cbv.com.br/volei-de-quadra/superliga-a-feminina',
+            league: 'Superliga - Femenina',
+            sport: 'volleyball',
+            countryId: 76,
          },
       ];
 
