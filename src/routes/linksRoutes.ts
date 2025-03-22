@@ -1,8 +1,9 @@
 import { Router } from 'express';
-import { getLinksBySportController } from '../controllers/linksController';
+import { linksController } from '../controllers/linksController';
 
 const linksRouter = Router();
 
-linksRouter.get('/', getLinksBySportController.getLinksBySport);
+linksRouter.get('/', linksController.getLinksBySport);
+linksRouter.post('/', linksController.addNewLink);
 
 export default linksRouter;

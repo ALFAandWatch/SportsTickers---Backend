@@ -1,4 +1,5 @@
 import { AppDataSource } from '../config/data-source';
+import { ILinkDto } from '../Dtos/LinkDto';
 import { Link } from '../entities/Link';
 
 export const getLinkBySportService = async (sport: string): Promise<Link[]> => {
@@ -13,9 +14,9 @@ export const getLinkBySportService = async (sport: string): Promise<Link[]> => {
    return links;
 };
 
-// export const addLinkService = async (req: Request, res: Response) => {
-//    const { name, icon } = req.body;
-//    const newSport = sportRepository.create({ name, icon });
-//    await sportRepository.save(newSport);
-//    res.json(newSport);
-// };
+export const addLinkService = async (linkData: ILinkDto) => {
+   const linksRepository = AppDataSource.getRepository(Link);
+   const newLink = linksRepository.create(linkData);
+   await linksRepository.save(newLink);
+   return newLink;
+};

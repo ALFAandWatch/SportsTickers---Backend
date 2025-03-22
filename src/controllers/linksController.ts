@@ -2,8 +2,9 @@ import { Request, Response } from 'express';
 import { Repository } from 'typeorm';
 import { AppDataSource } from '../config/data-source';
 import { Link } from '../entities/Link'; // Adjust the path based on your folder structure
+import { addLinkService } from '../services/linksService';
 
-export const getLinksBySportController = {
+export const linksController = {
    getLinksBySport: async (req: Request, res: Response) => {
       const { sport } = req.query;
 
@@ -34,6 +35,26 @@ export const getLinksBySportController = {
          res.json(filteredLinks);
       } catch (error) {
          return res.status(500).json({ message: 'Server error.' });
+      }
+   },
+   addNewLink: async (req: Request, res: Response) => {
+      try {
+         const { url, league, sport, countryId } = req.body;
+         const newLink = await addLinkService({
+            url,
+            league,
+            sport,
+            countryId,
+         });
+         res.status(201).json({
+            message: 'Se ha añadido el nuevo link exitosamente!',
+            data: newLink,
+         });
+      } catch (error) {
+         res.status(400).json({
+            message: 'Error al añadir el nuevo link.',
+            error,
+         });
       }
    },
 };
