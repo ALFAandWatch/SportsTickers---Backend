@@ -8,7 +8,12 @@ const server = express();
 server.use(morgan('dev'));
 server.use(express.json());
 
-server.use(cors());
+server.use(
+   cors({
+      origin: 'https://sport-tickers-j9k5.vercel.app/',
+      credentials: true,
+   })
+);
 
 server.use(router);
 
